@@ -62,8 +62,18 @@ public class ApplicationMapperObject {
 		if( taskPOJO != null ) {
 			taskEntity.setTaskId(taskPOJO.getTaskId());
 			taskEntity.setTask(taskPOJO.getTask());
-			taskEntity.setStartDate(new java.sql.Date(taskPOJO.getStartDate().getTime()));
-			taskEntity.setEndDate(new java.sql.Date(taskPOJO.getEndDate().getTime()));
+			if(taskPOJO.getStartDate() != null ) {
+				taskEntity.setStartDate(new java.sql.Date(taskPOJO.getStartDate().getTime()));
+			} else {
+				taskEntity.setStartDate(null);
+			}
+			
+			if(taskPOJO.getEndDate() != null ) {
+				taskEntity.setEndDate(new java.sql.Date(taskPOJO.getEndDate().getTime()));
+			} else {
+				taskEntity.setEndDate(null);
+			}
+			
 			taskEntity.setPriority(taskPOJO.getPriority());
 			
 		}
@@ -93,8 +103,17 @@ public class ApplicationMapperObject {
 		if( projectPOJO != null ) {
 			projectEntity.setProjectId(projectPOJO.getProjectId());
 			projectEntity.setProject(projectPOJO.getProject());
-			projectEntity.setStartDate(new java.sql.Date(projectPOJO.getStartDate().getTime()));
-			projectEntity.setEndDate(new java.sql.Date(projectPOJO.getEndDate().getTime()));
+			if(projectPOJO.getStartDate() != null ) {
+				projectEntity.setStartDate(new java.sql.Date(projectPOJO.getStartDate().getTime()));
+			} else {
+				projectEntity.setStartDate(null);
+			}
+			if(projectPOJO.getEndDate() != null ) {
+				projectEntity.setEndDate(new java.sql.Date(projectPOJO.getEndDate().getTime()));
+			} else {
+				projectEntity.setEndDate(null);
+			}
+			
 			projectEntity.setPriority(projectPOJO.getPriority());
 		}
 		
@@ -118,8 +137,18 @@ public class ApplicationMapperObject {
 			taskPOJO.setProjectId((taskEntity.getProjectEntity() != null ? new Long(taskEntity.getProjectEntity().getProjectId()).intValue() :  -1));
 			taskPOJO.setUserId((taskEntity.getUserEntity() != null ? new Long(taskEntity.getUserEntity().getUserId()).intValue() : -1 ));
 			
-			taskPOJO.setStartDate(new java.util.Date(taskEntity.getStartDate().getTime()));
-			taskPOJO.setEndDate(new java.util.Date(taskEntity.getEndDate().getTime()));
+			if(null != taskEntity.getStartDate()) {
+				taskPOJO.setStartDate(new java.util.Date(taskEntity.getStartDate().getTime()));
+			} else {
+				taskPOJO.setStartDate(null);
+			}
+			
+			if(null != taskEntity.getEndDate()) {
+				taskPOJO.setEndDate(new java.util.Date(taskEntity.getEndDate().getTime()));
+			} else {
+				taskPOJO.setEndDate(null);
+			}
+			
 			taskPOJO.setPriority(taskEntity.getPriority());
 		}
 		
@@ -150,8 +179,17 @@ public class ApplicationMapperObject {
 		if( projectEntity != null ) {
 			projectPOJO.setProjectId(new Long(projectEntity.getProjectId()).intValue());
 			projectPOJO.setProject(projectEntity.getProject());
-			projectPOJO.setStartDate(new java.util.Date(projectEntity.getStartDate().getTime()));
-			projectPOJO.setEndDate(new java.util.Date(projectEntity.getEndDate().getTime()));
+			if(null != projectEntity.getStartDate()) {
+				projectPOJO.setStartDate(new java.util.Date(projectEntity.getStartDate().getTime()));
+			} else {
+				projectPOJO.setStartDate(null);
+			}
+			if(null != projectEntity.getEndDate()) {
+				projectPOJO.setEndDate(new java.util.Date(projectEntity.getEndDate().getTime()));
+			} else {
+				projectPOJO.setEndDate(null);
+			}
+			
 			projectPOJO.setPriority(projectEntity.getPriority());
 			projectPOJO.setUserId((projectEntity.getUserEntity() != null ? new Long(projectEntity.getUserEntity().getUserId()).intValue() : -1 ));
 		}
