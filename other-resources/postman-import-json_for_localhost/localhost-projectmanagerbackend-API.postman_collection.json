@@ -43,41 +43,6 @@
 			"response": []
 		},
 		{
-			"name": "project/list LIST ALL",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"// For Cloud Testing",
-							"// var apiUrl = \"\";",
-							"",
-							"//For Local Machine Testing",
-							"var domain = \"localhost\";",
-							"var port = \"8080\";",
-							"var appContext = \"projectmanagerbackend\";",
-							"var apiUrl = \"http://\" + domain + \":\" + port +\"/\" + appContext + \"/\";",
-							"",
-							"",
-							"postman.setEnvironmentVariable(\"baseurl\", apiUrl);"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "{{baseurl}}project/list",
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
 			"name": "parent/list LIST ALL",
 			"event": [
 				{
@@ -102,6 +67,41 @@
 			],
 			"request": {
 				"url": "{{baseurl}}parent/list",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "project/list LIST ALL",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// For Cloud Testing",
+							"// var apiUrl = \"\";",
+							"",
+							"//For Local Machine Testing",
+							"var domain = \"localhost\";",
+							"var port = \"8080\";",
+							"var appContext = \"projectmanagerbackend\";",
+							"var apiUrl = \"http://\" + domain + \":\" + port +\"/\" + appContext + \"/\";",
+							"",
+							"",
+							"postman.setEnvironmentVariable(\"baseurl\", apiUrl);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{baseurl}}project/list",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -263,47 +263,6 @@
 			"response": []
 		},
 		{
-			"name": "project/ ADD",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"// For Cloud Testing",
-							"// var apiUrl = \"\";",
-							"",
-							"//For Local Machine Testing",
-							"var domain = \"localhost\";",
-							"var port = \"8080\";",
-							"var appContext = \"projectmanagerbackend\";",
-							"var apiUrl = \"http://\" + domain + \":\" + port +\"/\" + appContext + \"/\";",
-							"",
-							"",
-							"postman.setEnvironmentVariable(\"baseurl\", apiUrl);"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "{{baseurl}}project/",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"project\": \"project1\",\r\n    \"startDate\": \"2018-09-08T18:30:00.000+0000\",\r\n    \"endDate\": \"2018-09-08T18:30:00.000+0000\",\r\n    \"priority\": 2,\r\n    \"userId\": 1\r\n  }"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
 			"name": "parent/ ADD",
 			"event": [
 				{
@@ -339,6 +298,47 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"parentId\": 110,\n    \"parentTask\": \"ParentTask10\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "project/ ADD",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// For Cloud Testing",
+							"// var apiUrl = \"\";",
+							"",
+							"//For Local Machine Testing",
+							"var domain = \"localhost\";",
+							"var port = \"8080\";",
+							"var appContext = \"projectmanagerbackend\";",
+							"var apiUrl = \"http://\" + domain + \":\" + port +\"/\" + appContext + \"/\";",
+							"",
+							"",
+							"postman.setEnvironmentVariable(\"baseurl\", apiUrl);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{baseurl}}project/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"project\": \"project1\",\r\n    \"startDate\": \"2018-09-08T18:30:00.000+0000\",\r\n    \"endDate\": \"2018-09-08T18:30:00.000+0000\",\r\n    \"priority\": 2,\r\n    \"userId\": 1\r\n  }"
 				},
 				"description": ""
 			},
@@ -432,6 +432,51 @@
 			"response": []
 		},
 		{
+			"name": "parent/{id} UPDATE",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// For Cloud Testing",
+							"// var apiUrl = \"\";",
+							"",
+							"//For Local Machine Testing",
+							"var domain = \"localhost\";",
+							"var port = \"8080\";",
+							"var appContext = \"projectmanagerbackend\";",
+							"var apiUrl = \"http://\" + domain + \":\" + port +\"/\" + appContext + \"/\";",
+							"",
+							"",
+							"postman.setEnvironmentVariable(\"baseurl\", apiUrl);",
+							"",
+							"var reqBody = JSON.parse(request.data);",
+							"var parentId = reqBody.parentId;",
+							"postman.setEnvironmentVariable(\"parentId\", parentId);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{baseurl}}parent/{{parentId}}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"parentId\": 4,\r\n    \"parentTask\": \"ParentTask1_updated\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
 			"name": "project/{id} UPDATE",
 			"event": [
 				{
@@ -477,66 +522,6 @@
 			"response": []
 		},
 		{
-			"name": "parent/{id} UPDATE",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"// For Cloud Testing",
-							"// var apiUrl = \"\";",
-							"",
-							"//For Local Machine Testing",
-							"var domain = \"localhost\";",
-							"var port = \"8080\";",
-							"var appContext = \"projectmanagerbackend\";",
-							"var apiUrl = \"http://\" + domain + \":\" + port +\"/\" + appContext + \"/\";",
-							"",
-							"",
-							"postman.setEnvironmentVariable(\"baseurl\", apiUrl);",
-							"",
-							"var reqBody = JSON.parse(request.data);",
-							"var parentId = reqBody.parentId;",
-							"postman.setEnvironmentVariable(\"parentId\", parentId);"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": {
-					"raw": "{{baseurl}}parent/:parentId",
-					"host": [
-						"{{baseurl}}parent"
-					],
-					"path": [
-						":parentId"
-					],
-					"query": [],
-					"variable": [
-						{
-							"key": "parentId",
-							"value": "{{parentId}}"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"parentId\": 4,\r\n    \"parentTask\": \"ParentTask1_updated\"\r\n}"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
 			"name": "task/{id} UPDATE",
 			"event": [
 				{
@@ -564,22 +549,7 @@
 				}
 			],
 			"request": {
-				"url": {
-					"raw": "{{baseurl}}task/:taskId",
-					"host": [
-						"{{baseurl}}task"
-					],
-					"path": [
-						":taskId"
-					],
-					"query": [],
-					"variable": [
-						{
-							"key": "taskId",
-							"value": "{{taskId}}"
-						}
-					]
-				},
+				"url": "{{baseurl}}task/{{taskId}}",
 				"method": "PUT",
 				"header": [
 					{
@@ -642,7 +612,7 @@
 			"response": []
 		},
 		{
-			"name": "user/:userId DELETE",
+			"name": "user/{{userId}} DELETE",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -687,7 +657,52 @@
 			"response": []
 		},
 		{
-			"name": "project/:userId DELETE",
+			"name": "parent/{{parentId}} DELETE",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// For Cloud Testing",
+							"// var apiUrl = \"\";",
+							"",
+							"//For Local Machine Testing",
+							"var domain = \"localhost\";",
+							"var port = \"8080\";",
+							"var appContext = \"projectmanagerbackend\";",
+							"var apiUrl = \"http://\" + domain + \":\" + port +\"/\" + appContext + \"/\";",
+							"",
+							"",
+							"postman.setEnvironmentVariable(\"baseurl\", apiUrl);",
+							"",
+							"var reqBody = JSON.parse(request.data);",
+							"var parentId = reqBody.parentId;",
+							"postman.setEnvironmentVariable(\"parentId\", parentId);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{baseurl}}parent/{{parentId}}",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"parentId\": 8\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "project/{{projectId}} DELETE",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -732,67 +747,7 @@
 			"response": []
 		},
 		{
-			"name": "parent/:parentId DELETE",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"// For Cloud Testing",
-							"// var apiUrl = \"\";",
-							"",
-							"//For Local Machine Testing",
-							"var domain = \"localhost\";",
-							"var port = \"8080\";",
-							"var appContext = \"projectmanagerbackend\";",
-							"var apiUrl = \"http://\" + domain + \":\" + port +\"/\" + appContext + \"/\";",
-							"",
-							"",
-							"postman.setEnvironmentVariable(\"baseurl\", apiUrl);",
-							"",
-							"var reqBody = JSON.parse(request.data);",
-							"var parentId = reqBody.parentId;",
-							"postman.setEnvironmentVariable(\"parentId\", parentId);"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": {
-					"raw": "{{baseurl}}parent/:parentId",
-					"host": [
-						"{{baseurl}}parent"
-					],
-					"path": [
-						":parentId"
-					],
-					"query": [],
-					"variable": [
-						{
-							"key": "parentId",
-							"value": "{{parentId}}"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"parentId\": 8\r\n}"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "task/:taskId DELETE",
+			"name": "task/{{taskId}} DELETE",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -819,22 +774,7 @@
 				}
 			],
 			"request": {
-				"url": {
-					"raw": "{{baseurl}}task/:taskId",
-					"host": [
-						"{{baseurl}}task"
-					],
-					"path": [
-						":taskId"
-					],
-					"query": [],
-					"variable": [
-						{
-							"key": "taskId",
-							"value": "{{taskId}}"
-						}
-					]
-				},
+				"url": "{{baseurl}}task/{{taskId}}",
 				"method": "DELETE",
 				"header": [
 					{
