@@ -8,41 +8,6 @@
 	},
 	"item": [
 		{
-			"name": "project/dump CREATE DUMP",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"// For Cloud Testing",
-							"// var apiUrl = \"\";",
-							"",
-							"//For Local Machine Testing",
-							"var domain = \"192.168.99.100\";",
-							"var port = \"8080\";",
-							"var appContext = \"projectmanagerbackend\";",
-							"var apiUrl = \"http://\" + domain + \":\" + port +\"/\" + appContext + \"/\";",
-							"",
-							"",
-							"postman.setEnvironmentVariable(\"baseurl\", apiUrl);"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "{{baseurl}}project/dump",
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
 			"name": "user/dump CREATE DUMP",
 			"event": [
 				{
@@ -78,41 +43,6 @@
 			"response": []
 		},
 		{
-			"name": "task/dump CREATE DUMP",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"// For Cloud Testing",
-							"// var apiUrl = \"\";",
-							"",
-							"//For Local Machine Testing",
-							"var domain = \"192.168.99.100\";",
-							"var port = \"8080\";",
-							"var appContext = \"projectmanagerbackend\";",
-							"var apiUrl = \"http://\" + domain + \":\" + port +\"/\" + appContext + \"/\";",
-							"",
-							"",
-							"postman.setEnvironmentVariable(\"baseurl\", apiUrl);"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "{{baseurl}}task/dump",
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
 			"name": "parent/dump CREATE DUMP",
 			"event": [
 				{
@@ -137,6 +67,76 @@
 			],
 			"request": {
 				"url": "{{baseurl}}parent/dump",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "project/dump CREATE DUMP",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// For Cloud Testing",
+							"// var apiUrl = \"\";",
+							"",
+							"//For Local Machine Testing",
+							"var domain = \"192.168.99.100\";",
+							"var port = \"8080\";",
+							"var appContext = \"projectmanagerbackend\";",
+							"var apiUrl = \"http://\" + domain + \":\" + port +\"/\" + appContext + \"/\";",
+							"",
+							"",
+							"postman.setEnvironmentVariable(\"baseurl\", apiUrl);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{baseurl}}project/dump",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "task/dump CREATE DUMP",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// For Cloud Testing",
+							"// var apiUrl = \"\";",
+							"",
+							"//For Local Machine Testing",
+							"var domain = \"192.168.99.100\";",
+							"var port = \"8080\";",
+							"var appContext = \"projectmanagerbackend\";",
+							"var apiUrl = \"http://\" + domain + \":\" + port +\"/\" + appContext + \"/\";",
+							"",
+							"",
+							"postman.setEnvironmentVariable(\"baseurl\", apiUrl);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{baseurl}}task/dump",
 				"method": "GET",
 				"header": [],
 				"body": {

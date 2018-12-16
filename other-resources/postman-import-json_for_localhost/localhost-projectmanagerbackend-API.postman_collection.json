@@ -597,6 +597,51 @@
 			"response": []
 		},
 		{
+			"name": "task/convert/{id} CONVERT TO PARENT_TASK",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// For Cloud Testing",
+							"// var apiUrl = \"\";",
+							"",
+							"//For Local Machine Testing",
+							"var domain = \"localhost\";",
+							"var port = \"8080\";",
+							"var appContext = \"projectmanagerbackend\";",
+							"var apiUrl = \"http://\" + domain + \":\" + port +\"/\" + appContext + \"/\";",
+							"",
+							"",
+							"postman.setEnvironmentVariable(\"baseurl\", apiUrl);",
+							"",
+							"var reqBody = JSON.parse(request.data)",
+							"var taskId = reqBody.taskId;",
+							"postman.setEnvironmentVariable(\"taskId\", taskId);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{baseurl}}task/convert/{{taskId}}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"taskId\": 9,\n    \"task\": \"op_converted\",\n    \"parentTask\": \"ParentTask2\",\n    \"startDate\": \"2018-12-14T18:30:00.000+0000\",\n    \"endDate\": \"2018-12-21T18:30:00.000+0000\",\n    \"priority\": 8,\n    \"parentId\": 2,\n    \"projectId\": 2,\n    \"userId\": 5\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
 			"name": "user/:userId DELETE",
 			"event": [
 				{
