@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cts.fsd.projectmanager.pojo.ParentTaskPOJO;
 import com.cts.fsd.projectmanager.pojo.TaskPOJO;
+import com.cts.fsd.projectmanager.service.ParentTaskService;
 import com.cts.fsd.projectmanager.service.TaskService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,6 +32,9 @@ public class TaskController {
 	
 	@Autowired
 	TaskService taskService;
+	
+	@Autowired
+	ParentTaskService parentTaskService;
 	
 	/**
 	 * createTaskDump() is used to create database dump for task table if it does not exist in database
@@ -175,6 +180,58 @@ public class TaskController {
 		} else {
 			return new ResponseEntity<String>("ParentTask[parent id = "+taskId+"] Not Deleted from database as it does not exist..." , HttpStatus.OK);
 		}
+	}
+	
+	/**
+	 * convertTaskToParent() is used to convert Task To Parent Task 
+	 * @param taskId
+	 * @param taskPOJO
+	 * @return ResponseEntity<String>
+	 */
+	@RequestMapping(value = "/convert/{id}", method = RequestMethod.PUT, consumes = "application/json")
+	public ResponseEntity<String> convertTaskToParent(
+												@PathVariable(value = "id") int taskId , 
+												@RequestBody TaskPOJO taskPOJO			) {
+
+		System.out.println("Task to be converted to parent task which is coming in request = " + taskPOJO.toString());
+		
+		boolean dbResponse = false;
+		
+		ParentTaskPOJO parentTaskPOJO = null;
+		
+		List<ParentTaskPOJO> dbParentResponse = null;
+		
+		int parentId = -1;
+		
+		if (taskId == taskPOJO.getTaskId()) {
+			parentTaskPOJO = new ParentTaskPOJO();
+			parentTaskPOJO.setParentTask(taskPOJO.getTask());
+			
+			List<ParentTaskPOJO> parentTaskPOJOList = new ArrayList<ParentTaskPOJO>();
+			parentTaskPOJOList.add(parentTaskPOJO);
+			System.out.println("adding new Parent Task to db = " + parentTaskPOJOList.toString());
+			
+			dbParentResponse = parentTaskService.createParentTasks(parentTaskPOJOList);
+			if( (dbParentResponse != null && !dbParentResponse.isEmpty())  ) {
+				parentId = dbParentResponse.get(0).getParentId();
+			}
+			if(parentId >= 0  ) {
+				dbResponse = taskService.removeTaskById(taskId);
+			}
+		}
+		
+		if(dbResponse) {
+			return new ResponseEntity<String>("ParentTask[parent id = "+parentId+"] Created for the Old Task with ID - "+taskId+"..." , HttpStatus.OK);
+		} else {
+			if(parentId < 0 ) {
+				return new ResponseEntity<String>("ParentTask Not Created in database..." , HttpStatus.OK);
+			}
+			if( !dbResponse ) {
+				return new ResponseEntity<String>("Task[id = "+taskId+"] Not Deleted from database as it does not exist..." , HttpStatus.OK);
+			}
+			return new ResponseEntity<String>("Task not converted to ParentTask Properly in database..." , HttpStatus.OK);
+		}
+		
 	}
 	
 }

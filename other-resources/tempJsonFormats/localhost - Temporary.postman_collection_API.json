@@ -1,8 +1,8 @@
 {
 	"variables": [],
 	"info": {
-		"name": "localhost - Temporary",
-		"_postman_id": "dac7ed04-6c80-a165-3cb2-1ff23d97a782",
+		"name": "localhost-projectmanagerbackend-API",
+		"_postman_id": "c91baaf5-12e3-a250-4265-111d583e1724",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -591,6 +591,51 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"taskId\": 1,\n    \"task\": \"taskName1_updated4\",\n    \"startDate\": \"2018-09-08T18:30:00.000+0000\",\n    \"endDate\": \"2018-09-08T18:30:00.000+0000\",\n    \"priority\": 11,\n    \"parentId\": 200,\n    \"projectId\": 100,\n    \"userId\": 300\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "task/convert/{id} CONVERT TO PARENT_TASK",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// For Cloud Testing",
+							"// var apiUrl = \"\";",
+							"",
+							"//For Local Machine Testing",
+							"var domain = \"localhost\";",
+							"var port = \"8080\";",
+							"var appContext = \"projectmanagerbackend\";",
+							"var apiUrl = \"http://\" + domain + \":\" + port +\"/\" + appContext + \"/\";",
+							"",
+							"",
+							"postman.setEnvironmentVariable(\"baseurl\", apiUrl);",
+							"",
+							"var reqBody = JSON.parse(request.data)",
+							"var taskId = reqBody.taskId;",
+							"postman.setEnvironmentVariable(\"taskId\", taskId);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{baseurl}}task/convert/{{taskId}}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"taskId\": 9,\n    \"task\": \"op_converted\",\n    \"parentTask\": \"ParentTask2\",\n    \"startDate\": \"2018-12-14T18:30:00.000+0000\",\n    \"endDate\": \"2018-12-21T18:30:00.000+0000\",\n    \"priority\": 8,\n    \"parentId\": 2,\n    \"projectId\": 2,\n    \"userId\": 5\n}"
 				},
 				"description": ""
 			},
